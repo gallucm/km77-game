@@ -1,4 +1,4 @@
-import { generatorPosition, isIndoors } from './level';
+import { generatorPosition, isIndoors } from './levels';
 
 interface ListenerPose {
     x: number;

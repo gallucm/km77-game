@@ -17,7 +17,7 @@ import {
 } from 'playcanvas';
 import type { ContainerResource } from 'playcanvas';
 
-import { buildLevel, checkpoints, floorAt, getZone } from './level';
+import { buildLevel, checkpoints, floorAt, getZone } from './levels';
 import type { Checkpoint, Progress, TargetId } from './progress';
 
 export type Quality = 'low' | 'medium' | 'high';
@@ -44,19 +44,21 @@ const QUALITY_PIXEL_RATIO: Record<Quality, number> = { low: 0.62, medium: 0.82, 
 const NIGHT_SKY = new Color(0.055, 0.103, 0.132);
 const MOVEMENT_KEYS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ShiftLeft', 'ShiftRight']);
 
-async function addCabin(app: AppBase): Promise<void> {
-    const url = `${import.meta.env.BASE_URL}assets/cabana-g0.glb`;
-    const resource = await new Promise<ContainerResource>((resolve, reject) => {
+function loadModel(app: AppBase, path: string): Promise<ContainerResource> {
+    const url = `${import.meta.env.BASE_URL}assets/${path}`;
+    return new Promise<ContainerResource>((resolve, reject) => {
         app.assets.loadFromUrl(url, 'container', (error, asset) => {
             if (error || !asset?.resource) {
-                reject(new Error('No se pudo cargar el modelo de prueba de la cabaña.', { cause: error }));
+                reject(new Error(`No se pudo cargar ${path}.`, { cause: error }));
                 return;
             }
 
             resolve(asset.resource as ContainerResource);
         });
     });
+}
 
+function addCabin(app: AppBase, resource: ContainerResource): void {
     const cabin = new Entity('Referencia GLB fuera del recorrido');
     cabin.setLocalPosition(-20, 0, -13);
     cabin.addChild(resource.instantiateRenderEntity());
@@ -111,9 +113,23 @@ export async function createGame(canvas: HTMLCanvasElement, preferWebGPU: boolea
     flashlight.enabled = false;
     camera.addChild(flashlight);
 
-    const level = buildLevel(app, NIGHT_SKY);
+    const trees = Promise.all([loadModel(app, 'trees/pino-alto.glb'), loadModel(app, 'trees/pino-abierto.glb')]).catch(
+        (error: unknown) => {
+            console.warn('Se usará el bosque procedural de respaldo.', error);
+            return undefined;
+        }
+    );
+    const keyAssets = Promise.all([loadModel(app, 'keys/cobertizo.glb'), loadModel(app, 'keys/sotano.glb')])
+        .then(([shed, basement]) => ({ shed, basement }))
+        .catch((error: unknown) => {
+            console.warn('Se usarán los indicadores de llave de respaldo.', error);
+            return undefined;
+        });
+    let level: ReturnType<typeof buildLevel>;
     try {
-        await addCabin(app);
+        const [cabin, forest, keyModels] = await Promise.all([loadModel(app, 'cabana-g0.glb'), trees, keyAssets]);
+        level = buildLevel(app, NIGHT_SKY, forest, keyModels);
+        addCabin(app, cabin);
     } catch (error) {
         app.destroy();
         throw error;

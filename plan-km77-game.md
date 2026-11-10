@@ -695,16 +695,18 @@ Registrar FPS medio, percentil bajo 1% FPS o percentil 99 de frame time, draw ca
 
 **Meta:** una pequeña zona muestra el aspecto y sonido final, con mediciones.
 
-- [ ] Definir guía visual, escala, materiales y convención de assets.
-- [ ] Probar el recorrido con 2–3 personas sin guion. Registrar orientación, pistas ignoradas, atascos, duración y tensión al volver al portón. Usar lo observado para ajustar la muestra.
-- [ ] Vestir un trayecto breve **portón → camino → interior de cabaña → regreso**. Incluir una pista que se pueda leer y validar el cambio de luz y sonido al cruzar el umbral.
-- [ ] Añadir 2–3 variantes de árbol de calidad definitiva, instancing por sector y fog.
-- [ ] Implementar linterna, composición nocturna y lightmaps representativas.
-- [ ] Audio de pasos en tierra/madera, viento, puerta y generador.
-- [ ] Probar texturas/GLB comprimidos en WebGL2 y, si está en alcance, WebGPU.
-- [ ] Implementar presets Bajo/Medio/Alto y overlay MiniStats de desarrollo.
-- [ ] Ejecutar primera batería de benchmark y registrar métricas.
-- [ ] Validar capturas visuales con guía de arte y checklist de visibilidad.
+- [x] Definir guía visual, escala, materiales y convención de assets. (Ver `docs/design/guia-visual.md`.)
+- [ ] Probar el recorrido con 2–3 personas sin guion. Registrar orientación, pistas ignoradas, atascos, duración y tensión al volver al portón. Usar lo observado para ajustar la muestra. **Pendiente de validación humana (gate de playtest, no bloquea el cierre técnico de G2).**
+- [x] Vestir un trayecto breve **portón → camino → interior de cabaña → regreso**. Incluir una pista que se pueda leer y validar el cambio de luz y sonido al cruzar el umbral. (Evidencia: `docs/qa/evidence/g2/`.)
+- [x] Añadir 2–3 variantes de árbol de calidad definitiva, instancing por sector y fog. (`src/level-decoration.ts`, verificado en benchmark G2.)
+- [x] Implementar linterna, composición nocturna y lightmaps representativas. (Lightmap horneado en porche; sombra de linterna en Alto.)
+- [x] Audio de pasos en tierra/madera, viento, puerta y generador. (`src/ambience.ts`.)
+- [ ] Probar texturas/GLB comprimidos en WebGL2 y, si está en alcance, WebGPU. (Pendiente: pipeline `glTF Transform` cuando se incorporen assets de mayor tamaño; GLB de prueba 4,8 KiB.)
+- [x] Implementar presets Bajo/Medio/Alto y overlay MiniStats de desarrollo. (`src/game.ts`, `src/main.ts`.)
+- [x] Ejecutar primera batería de benchmark y registrar métricas. (Ver `docs/qa/fase-2.md` § Benchmark G2: 60 FPS, p99 ~16,8 ms, 24–39 draw calls, iGPU Intel UHD 630.)
+- [x] Validar capturas visuales con guía de arte y checklist de visibilidad. (`docs/qa/evidence/g2/*.png`.)
+
+**G2 cerrado el 10/11/2026 (gate técnico).** Gate de playtest humano pendiente (2–3 sesiones ciegas + escucha del audio). No se avanzó a FASE 3. Ver `docs/qa/fase-2.md` § Estado del gate.
 
 **Gate G2:** la escena elegida se parece razonablemente al objetivo artístico, los interactuables se ven y se miden Alto y Bajo en hardware de referencia. Si algún perfil queda fuera de presupuesto, registrar un plan correctivo cuantificado.
 

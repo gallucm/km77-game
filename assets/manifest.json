@@ -1,0 +1,225 @@
+{
+    "project": "Kilómetro 17: El Portón",
+    "version": "0.1.0",
+    "generated": "2026-11-10",
+    "description": "Manifiesto de assets: IDs, zonas, pesos y dependencias. Fuente de verdad junto con assets/ASSET_CREDITS.md.",
+    "zones": [
+        {
+            "id": "cabin-exterior",
+            "name": "Exterior de la cabaña",
+            "description": "Fachada, porche y entorno inmediato de la cabaña."
+        },
+        {
+            "id": "cabin-interior",
+            "name": "Interior de la cabaña",
+            "description": "Cocina, oficina y habitaciones de la cabaña."
+        },
+        { "id": "basement", "name": "Sótano", "description": "Sótano bajo la cabaña (escalera, generador, fusibles)." },
+        { "id": "shed", "name": "Cobertizo", "description": "Cobertizo con generador y recursos." },
+        { "id": "well", "name": "Pozo", "description": "Pozo y su entorno." },
+        { "id": "gate", "name": "Portón", "description": "Portón de hierro y zona de salida." },
+        { "id": "path", "name": "Camino", "description": "Camino de tierra y accesos." },
+        { "id": "forest", "name": "Bosque perimetral", "description": "Árboles, bordes del mapa y vegetación." },
+        { "id": "global", "name": "Global", "description": "Recursos procedurales usados en múltiples zonas." }
+    ],
+    "assets": [
+        {
+            "id": "K17-GLB-001",
+            "type": "model",
+            "path": "public/assets/cabana-g0.glb",
+            "zone": "cabin-exterior",
+            "sizeBytes": 4860,
+            "license": "propio del proyecto",
+            "origin": "generado por el equipo del proyecto como placeholder geométrico (generator: \"Kilómetro 17 G0\")",
+            "status": "placeholder",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-MAT-001",
+            "type": "material",
+            "path": "generated:client (src/level-decoration.ts, función tile)",
+            "zone": "global",
+            "sizeBytes": 0,
+            "license": "propio del proyecto",
+            "origin": "generado en cliente (textura procedimental 64x64 RGBA8 con mipmaps)",
+            "status": "verificado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-MAT-002",
+            "type": "material",
+            "path": "generated:client (src/level-decoration.ts)",
+            "zone": "global",
+            "sizeBytes": 0,
+            "license": "propio del proyecto",
+            "origin": "generado en cliente (textura procedimental 64x64 RGBA8 con mipmaps)",
+            "status": "verificado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-MAT-003",
+            "type": "material",
+            "path": "generated:client (src/level-decoration.ts)",
+            "zone": "global",
+            "sizeBytes": 0,
+            "license": "propio del proyecto",
+            "origin": "generado en cliente (textura procedimental 64x64 RGBA8 con mipmaps)",
+            "status": "verificado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-MAT-004",
+            "type": "material",
+            "path": "generated:client (src/level-decoration.ts)",
+            "zone": "global",
+            "sizeBytes": 0,
+            "license": "propio del proyecto",
+            "origin": "generado en cliente (textura procedimental 64x64 RGBA8 con mipmaps, lightmap del porche UV0)",
+            "status": "verificado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-MAT-005",
+            "type": "material",
+            "path": "generated:client (src/level-decoration.ts)",
+            "zone": "forest",
+            "sizeBytes": 0,
+            "license": "propio del proyecto",
+            "origin": "generado en cliente (textura procedural 128x128 RGBA8 difusa + normal derivada, mipmaps) para corteza de pino semi-realista",
+            "status": "verificado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-002",
+            "type": "model",
+            "path": "public/assets/trees/pino-alto.glb",
+            "zone": "forest",
+            "sizeBytes": 339996,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-pines.py",
+            "status": "verificado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-003",
+            "type": "model",
+            "path": "public/assets/trees/pino-abierto.glb",
+            "zone": "forest",
+            "sizeBytes": 339996,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-pines.py",
+            "status": "verificado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-004",
+            "type": "model",
+            "path": "public/assets/models/tree-variant-03.glb",
+            "zone": "forest",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (Poly Haven / ambientCG / propio)",
+            "status": "pendiente",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-005",
+            "type": "model",
+            "path": "public/assets/models/cabin-interior.glb",
+            "zone": "cabin-interior",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (Poly Haven / ambientCG / propio)",
+            "status": "pendiente",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-006",
+            "type": "model",
+            "path": "public/assets/models/shed.glb",
+            "zone": "shed",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (Poly Haven / ambientCG / propio)",
+            "status": "pendiente",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-007",
+            "type": "model",
+            "path": "public/assets/models/well.glb",
+            "zone": "well",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (Poly Haven / ambientCG / propio)",
+            "status": "pendiente",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-008",
+            "type": "model",
+            "path": "public/assets/models/path.glb",
+            "zone": "path",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (Poly Haven / ambientCG / propio)",
+            "status": "pendiente",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-009",
+            "type": "model",
+            "path": "public/assets/models/gate.glb",
+            "zone": "gate",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (Poly Haven / ambientCG / propio)",
+            "status": "pendiente",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-010",
+            "type": "model",
+            "path": "public/assets/keys/cobertizo.glb",
+            "zone": "cabin",
+            "sizeBytes": 47724,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-keys.py",
+            "status": "inspeccionado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-011",
+            "type": "model",
+            "path": "public/assets/keys/sotano.glb",
+            "zone": "cabin",
+            "sizeBytes": 47720,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-keys.py",
+            "status": "inspeccionado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-TEX-001",
+            "type": "texture",
+            "path": "public/assets/textures/documents/",
+            "zone": "cabin-interior",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (propio / escaneo)",
+            "status": "pendiente",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-AUD-001",
+            "type": "audio",
+            "path": "public/assets/audio/ambience.ogg",
+            "zone": "global",
+            "sizeBytes": null,
+            "license": "TBD",
+            "origin": "TBD (revisión individual de licencia)",
+            "status": "pendiente",
+            "dependencies": ["webaudio"]
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "low": [
+        {
+            "renderer": "ANGLE (Intel, Vulkan 1.4.318 (Intel(R) UHD Graphics 630 (CML GT2) (0x00009BC8)), Intel open-source Mesa driver)",
+            "quality": "low",
+            "drawCalls": 24,
+            "width": 1190,
+            "height": 669,
+            "frames": 45,
+            "fps": 60.0080010668089,
+            "p99": 16.800000000000068
+        },
+        {
+            "renderer": "ANGLE (Intel, Vulkan 1.4.318 (Intel(R) UHD Graphics 630 (CML GT2) (0x00009BC8)), Intel open-source Mesa driver)",
+            "quality": "low",
+            "drawCalls": 24,
+            "width": 1190,
+            "height": 669,
+            "frames": 45,
+            "fps": 60,
+            "p99": 16.799999999999955
+        },
+        {
+            "renderer": "ANGLE (Intel, Vulkan 1.4.318 (Intel(R) UHD Graphics 630 (CML GT2) (0x00009BC8)), Intel open-source Mesa driver)",
+            "quality": "low",
+            "drawCalls": 24,
+            "width": 1190,
+            "height": 669,
+            "frames": 45,
+            "fps": 60.008001066808916,
+            "p99": 16.700000000000273
+        }
+    ],
+    "high": [
+        {
+            "renderer": "ANGLE (Intel, Vulkan 1.4.318 (Intel(R) UHD Graphics 630 (CML GT2) (0x00009BC8)), Intel open-source Mesa driver)",
+            "quality": "high",
+            "drawCalls": 24,
+            "width": 1920,
+            "height": 1080,
+            "frames": 45,
+            "fps": 60,
+            "p99": 16.800000000000182
+        },
+        {
+            "renderer": "ANGLE (Intel, Vulkan 1.4.318 (Intel(R) UHD Graphics 630 (CML GT2) (0x00009BC8)), Intel open-source Mesa driver)",
+            "quality": "high",
+            "drawCalls": 24,
+            "width": 1920,
+            "height": 1080,
+            "frames": 45,
+            "fps": 60,
+            "p99": 16.800000000000182
+        },
+        {
+            "renderer": "ANGLE (Intel, Vulkan 1.4.318 (Intel(R) UHD Graphics 630 (CML GT2) (0x00009BC8)), Intel open-source Mesa driver)",
+            "quality": "high",
+            "drawCalls": 24,
+            "width": 1920,
+            "height": 1080,
+            "frames": 45,
+            "fps": 60,
+            "p99": 16.800000000000182
+        }
+    ],
+    "highWithFlashlight": {
+        "renderer": "ANGLE (Intel, Vulkan 1.4.318 (Intel(R) UHD Graphics 630 (CML GT2) (0x00009BC8)), Intel open-source Mesa driver)",
+        "quality": "high",
+        "drawCalls": 39,
+        "width": 1920,
+        "height": 1080,
+        "frames": 45,
+        "fps": 60.00800106680894,
+        "p99": 16.800000000000182
+    }
+}
