@@ -103,6 +103,24 @@ Fuentes seguras para iniciar (sección 7.3 del plan): Poly Haven (CC0), ambientC
 - **Uso**: llaves recogibles en la cocina y la oficina de la cabaña.
 - **Estado**: geometría y dimensiones verificadas con el inspector de GLB.
 
+### K17-GLB-012 — Pasto del bosque
+
+- **Archivo**: `public/assets/grass/pasto-del-bosque.glb`.
+- **Formato**: GLB 2.0, 29.720 bytes, 342 triángulos por mata y un material PBR con color por vértice.
+- **Origen y licencia**: original del proyecto, generado con `scripts/generate-grass.py`.
+- **Fecha de incorporación**: 10/11/2026 (FASE 3).
+- **Uso**: suelo exterior del predio, instanciado por sector.
+- **Estado**: geometría, escala y apoyo verificados con el inspector de GLB.
+
+### K17-GLB-013 — Bidón FUEL
+
+- **Archivo**: `public/assets/props/bidon-fuel.glb`.
+- **Formato**: GLB 2.0, 332.624 bytes, 5.236 triángulos y seis materiales. Letras modeladas en ambos lados.
+- **Origen y licencia**: original del proyecto, generado por Mr. Design con `scripts/generate-fuel-can.py`.
+- **Fecha de incorporación**: 10/11/2026 (FASE 3).
+- **Uso**: combustible recogible junto a la leña del cobertizo.
+- **Estado**: geometría y dimensiones verificadas con el inspector de GLB.
+
 ## Pendientes
 
 - Registrar cada GLB, imagen, audio o fuente externa que se incorpore en FASE 3 con su licencia individual.

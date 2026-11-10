@@ -34,13 +34,15 @@ export function buildLevel(
     app: AppBase,
     sky = new Color(0.055, 0.103, 0.132),
     forest?: ContainerResource[],
-    keys?: CabinKeyModels
+    keys?: CabinKeyModels,
+    grass?: ContainerResource,
+    fuel?: ContainerResource
 ): LevelHandle {
     const root = app.root;
     const blockers: Box[] = [];
     const targets = new Map<TargetId, Box>();
 
-    const ground = material('Tierra fría', new Color(0.23, 0.29, 0.27));
+    const ground = material('Tierra fría', grass ? new Color(0.19, 0.23, 0.16) : new Color(0.23, 0.29, 0.27));
     const path = material('Camino', new Color(0.39, 0.35, 0.31));
     const wood = material('Tablas envejecidas', new Color(0.56, 0.42, 0.32));
     const dark = material('Madera oscura', new Color(0.29, 0.25, 0.22));
@@ -180,10 +182,10 @@ export function buildLevel(
     };
 
     const refs: Partial<LevelRefs> = {};
-    Object.assign(refs, buildPerimeter(ctx));
+    Object.assign(refs, buildPerimeter(ctx, grass));
     Object.assign(refs, buildCabin(ctx, keys));
     Object.assign(refs, buildBasement(ctx));
-    Object.assign(refs, buildShed(ctx));
+    Object.assign(refs, buildShed(ctx, fuel));
     Object.assign(refs, buildWell(ctx));
     Object.assign(refs, buildGate(ctx));
     Object.assign(refs, buildTrees(ctx, forest));

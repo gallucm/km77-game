@@ -200,6 +200,28 @@
             "dependencies": ["webgl2"]
         },
         {
+            "id": "K17-GLB-012",
+            "type": "model",
+            "path": "public/assets/grass/pasto-del-bosque.glb",
+            "zone": "forest",
+            "sizeBytes": 29720,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-grass.py",
+            "status": "inspeccionado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-013",
+            "type": "model",
+            "path": "public/assets/props/bidon-fuel.glb",
+            "zone": "shed",
+            "sizeBytes": 332624,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-fuel-can.py",
+            "status": "inspeccionado",
+            "dependencies": ["webgl2"]
+        },
+        {
             "id": "K17-TEX-001",
             "type": "texture",
             "path": "public/assets/textures/documents/",

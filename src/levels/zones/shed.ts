@@ -1,7 +1,13 @@
+import { Color, Entity } from 'playcanvas';
+import type { ContainerResource } from 'playcanvas';
+
 import { generatorPosition } from '../common';
 import type { LevelContext } from '../types';
 
-export function buildShed(ctx: LevelContext): {
+export function buildShed(
+    ctx: LevelContext,
+    fuelModel?: ContainerResource
+): {
     shedDoor: ReturnType<LevelContext['target']>;
     fuse: ReturnType<LevelContext['target']>;
     fuel: ReturnType<LevelContext['target']>;
@@ -40,6 +46,16 @@ export function buildShed(ctx: LevelContext): {
     );
     ctx.solid('Leña apilada', ctx.bark, [13.15, 0.32, -5.38], [1.25, 0.64, 0.68]);
     const fuel = ctx.target('fuel', marker, [12.75, 1.0, -4.5], [0.43, 0.59, 0.3]);
+
+    if (fuelModel) {
+        const visual = new Entity('Modelo del bidón FUEL');
+        visual.setLocalScale(1 / fuel.size[0], 1 / fuel.size[1], 1 / fuel.size[2]);
+        visual.addChild(fuelModel.instantiateRenderEntity());
+        fuel.entity.addChild(visual);
+        fuel.entity.render!.enabled = false;
+        ctx.pointLight('Luz exterior de la leñera', new Color(1, 0.78, 0.56), [12.55, 2.05, -3.95], 1.6, 3.1);
+        ctx.primitive(root, 'Cajón de combustible', wood, [12.75, 0.35, -4.5], [0.59, 0.7, 0.45]);
+    }
 
     return { shedDoor, fuse, fuel, generatorLamp };
 }

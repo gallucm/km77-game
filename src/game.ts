@@ -125,10 +125,24 @@ export async function createGame(canvas: HTMLCanvasElement, preferWebGPU: boolea
             console.warn('Se usarán los indicadores de llave de respaldo.', error);
             return undefined;
         });
+    const grassAsset = loadModel(app, 'grass/pasto-del-bosque.glb').catch((error: unknown) => {
+        console.warn('Se usará el suelo exterior sin pasto 3D.', error);
+        return undefined;
+    });
+    const fuelAsset = loadModel(app, 'props/bidon-fuel.glb').catch((error: unknown) => {
+        console.warn('Se usará el indicador de combustible de respaldo.', error);
+        return undefined;
+    });
     let level: ReturnType<typeof buildLevel>;
     try {
-        const [cabin, forest, keyModels] = await Promise.all([loadModel(app, 'cabana-g0.glb'), trees, keyAssets]);
-        level = buildLevel(app, NIGHT_SKY, forest, keyModels);
+        const [cabin, forest, keyModels, grass, fuel] = await Promise.all([
+            loadModel(app, 'cabana-g0.glb'),
+            trees,
+            keyAssets,
+            grassAsset,
+            fuelAsset
+        ]);
+        level = buildLevel(app, NIGHT_SKY, forest, keyModels, grass, fuel);
         addCabin(app, cabin);
     } catch (error) {
         app.destroy();
