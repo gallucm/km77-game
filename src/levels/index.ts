@@ -36,7 +36,8 @@ export function buildLevel(
     forest?: ContainerResource[],
     keys?: CabinKeyModels,
     grass?: ContainerResource,
-    fuel?: ContainerResource
+    fuel?: ContainerResource,
+    equipment?: { generator?: ContainerResource; fuse?: ContainerResource }
 ): LevelHandle {
     const root = app.root;
     const blockers: Box[] = [];
@@ -185,7 +186,7 @@ export function buildLevel(
     Object.assign(refs, buildPerimeter(ctx, grass));
     Object.assign(refs, buildCabin(ctx, keys));
     Object.assign(refs, buildBasement(ctx));
-    Object.assign(refs, buildShed(ctx, fuel));
+    Object.assign(refs, buildShed(ctx, fuel, equipment));
     Object.assign(refs, buildWell(ctx));
     Object.assign(refs, buildGate(ctx));
     Object.assign(refs, buildTrees(ctx, forest));

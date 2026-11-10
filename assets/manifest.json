@@ -222,6 +222,39 @@
             "dependencies": ["webgl2"]
         },
         {
+            "id": "K17-GLB-014",
+            "type": "model",
+            "path": "public/assets/props/generador.glb",
+            "zone": "shed",
+            "sizeBytes": 363004,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-generator-kit.py",
+            "status": "inspeccionado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-015",
+            "type": "model",
+            "path": "public/assets/props/fusible.glb",
+            "zone": "shed",
+            "sizeBytes": 94736,
+            "license": "propio del proyecto",
+            "origin": "Generado para Kilómetro 17 con scripts/generate-generator-kit.py",
+            "status": "inspeccionado",
+            "dependencies": ["webgl2"]
+        },
+        {
+            "id": "K17-GLB-016",
+            "type": "model",
+            "path": "public/assets/player/brazos.glb",
+            "zone": "player",
+            "sizeBytes": 56232,
+            "license": "propio del proyecto",
+            "origin": "Mr. Design, scripts/generate-arms.py",
+            "status": "inspeccionado",
+            "dependencies": ["webgl2"]
+        },
+        {
             "id": "K17-TEX-001",
             "type": "texture",
             "path": "public/assets/textures/documents/",

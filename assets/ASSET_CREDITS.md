@@ -121,6 +121,23 @@ Fuentes seguras para iniciar (sección 7.3 del plan): Poly Haven (CC0), ambientC
 - **Uso**: combustible recogible junto a la leña del cobertizo.
 - **Estado**: geometría y dimensiones verificadas con el inspector de GLB.
 
+### K17-GLB-014 y K17-GLB-015 — Generador portátil y fusible cerámico
+
+- **Archivos**: `public/assets/props/generador.glb` y `public/assets/props/fusible.glb`.
+- **Formato**: GLB 2.0, 363.004 bytes y 5.804 triángulos para el generador, 94.736 bytes y 1.484 triángulos para el fusible.
+- **Origen y licencia**: originales del proyecto, generados por Mr. Design con `scripts/generate-generator-kit.py`.
+- **Fecha de incorporación**: 10/11/2026 (FASE 3).
+- **Uso**: generador interactivo del cobertizo y fusible de repuesto recogible.
+- **Estado**: geometría, dimensiones y apoyos verificados con el inspector de GLB. Sin texturas externas ni decodificadores.
+
+### K17-GLB-016 — Brazos del jugador
+
+- **Archivo**: `public/assets/player/brazos.glb`.
+- **Formato**: GLB 2.0, 56.232 bytes y 2.760 triángulos.
+- **Origen y licencia**: original del proyecto, generado por Mr. Design con `scripts/generate-arms.py`.
+- **Uso**: vista en primera persona, con brazos separados y balanceo procedural.
+- **Estado**: geometría y jerarquía inspeccionadas.
+
 ## Pendientes
 
 - Registrar cada GLB, imagen, audio o fuente externa que se incorpore en FASE 3 con su licencia individual.

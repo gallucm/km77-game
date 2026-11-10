@@ -9,9 +9,9 @@ export function buildLighting(ctx: LevelContext): Record<string, never> {
     app.scene.fog.color.copy(sky);
     app.scene.fog.start = 12;
     app.scene.fog.end = 40;
-    app.scene.ambientLight = new Color(0.24, 0.3, 0.39);
+    app.scene.ambientLight = new Color(0.12, 0.15, 0.2);
     const moon = new Entity('Luz de luna');
-    moon.addComponent('light', { type: 'directional', color: new Color(0.55, 0.73, 0.99), intensity: 0.73 });
+    moon.addComponent('light', { type: 'directional', color: new Color(0.55, 0.73, 0.99), intensity: 0.26 });
     moon.setEulerAngles(47, -29, 20);
     root.addChild(moon);
 

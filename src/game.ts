@@ -18,6 +18,7 @@ import {
 import type { ContainerResource } from 'playcanvas';
 
 import { buildLevel, checkpoints, floorAt, getZone } from './levels';
+import { createPlayerArms } from './player-arms';
 import type { Checkpoint, Progress, TargetId } from './progress';
 
 export type Quality = 'low' | 'medium' | 'high';
@@ -41,7 +42,7 @@ const WALK_SPEED = 3.2;
 const RUN_SPEED = 5;
 const MOUSE_SENSITIVITY = 0.14;
 const QUALITY_PIXEL_RATIO: Record<Quality, number> = { low: 0.62, medium: 0.82, high: 1.5 };
-const NIGHT_SKY = new Color(0.055, 0.103, 0.132);
+const NIGHT_SKY = new Color(0.018, 0.028, 0.041);
 const MOVEMENT_KEYS = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ShiftLeft', 'ShiftRight']);
 
 function loadModel(app: AppBase, path: string): Promise<ContainerResource> {
@@ -100,10 +101,10 @@ export async function createGame(canvas: HTMLCanvasElement, preferWebGPU: boolea
     flashlight.addComponent('light', {
         type: 'spot',
         color: new Color(1, 0.92, 0.77),
-        intensity: 2.45,
-        range: 15,
-        innerConeAngle: 17,
-        outerConeAngle: 29,
+        intensity: 1.15,
+        range: 8,
+        innerConeAngle: 13,
+        outerConeAngle: 23,
         shadowResolution: 512,
         normalOffsetBias: 0.035
     });
@@ -133,16 +134,31 @@ export async function createGame(canvas: HTMLCanvasElement, preferWebGPU: boolea
         console.warn('Se usará el indicador de combustible de respaldo.', error);
         return undefined;
     });
+    const equipmentAssets = Promise.allSettled([
+        loadModel(app, 'props/generador.glb'),
+        loadModel(app, 'props/fusible.glb')
+    ]).then(([generator, fuse]) => ({
+        generator: generator.status === 'fulfilled' ? generator.value : undefined,
+        fuse: fuse.status === 'fulfilled' ? fuse.value : undefined
+    }));
+    const armsAsset = loadModel(app, 'player/brazos.glb').catch((error: unknown) => {
+        console.warn('No se pudieron cargar los brazos del jugador.', error);
+        return undefined;
+    });
+    let arms: ReturnType<typeof createPlayerArms> | undefined;
     let level: ReturnType<typeof buildLevel>;
     try {
-        const [cabin, forest, keyModels, grass, fuel] = await Promise.all([
+        const [cabin, forest, keyModels, grass, fuel, equipment, armsModel] = await Promise.all([
             loadModel(app, 'cabana-g0.glb'),
             trees,
             keyAssets,
             grassAsset,
-            fuelAsset
+            fuelAsset,
+            equipmentAssets,
+            armsAsset
         ]);
-        level = buildLevel(app, NIGHT_SKY, forest, keyModels, grass, fuel);
+        level = buildLevel(app, NIGHT_SKY, forest, keyModels, grass, fuel, equipment);
+        if (armsModel) arms = createPlayerArms(app, camera, armsModel);
         addCabin(app, cabin);
     } catch (error) {
         app.destroy();
@@ -186,7 +202,11 @@ export async function createGame(canvas: HTMLCanvasElement, preferWebGPU: boolea
 
     app.on('update', (dt: number) => {
         level.update(dt);
-        if (!active || keys.size === 0 || document.pointerLockElement !== canvas) return;
+        if (!active || document.pointerLockElement !== canvas) return;
+        if (keys.size === 0) {
+            arms?.update(dt, 0);
+            return;
+        }
 
         const side = Number(keys.has('KeyD')) - Number(keys.has('KeyA'));
         const forward = Number(keys.has('KeyW')) - Number(keys.has('KeyS'));
@@ -199,6 +219,7 @@ export async function createGame(canvas: HTMLCanvasElement, preferWebGPU: boolea
         const resolvedX = level.canWalkAt(nextX, z) ? nextX : x;
         const resolvedZ = level.canWalkAt(resolvedX, nextZ) ? nextZ : z;
 
+        arms?.update(dt, Math.hypot(resolvedX - x, resolvedZ - z) / Math.max(dt, 0.001));
         camera.setPosition(resolvedX, floorAt(resolvedX, resolvedZ) + CAMERA_HEIGHT, resolvedZ);
     });
 
@@ -208,6 +229,7 @@ export async function createGame(canvas: HTMLCanvasElement, preferWebGPU: boolea
         backend: device.deviceType === DEVICETYPE_WEBGPU ? 'WebGPU' : 'WebGL2',
         setActive(value) {
             active = value;
+            arms?.setActive(value);
             if (!active) keys.clear();
         },
         getPose() {
