@@ -1,0 +1,277 @@
+:root {
+    color-scheme: dark;
+    font-family: system-ui, sans-serif;
+    color: #e8e4d9;
+    background: #0a1113;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+#game-canvas {
+    position: fixed;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#backend,
+#render-stats {
+    position: fixed;
+    z-index: 2;
+    right: 1rem;
+    margin: 0;
+    color: #e8e4d9;
+    font:
+        0.75rem ui-monospace,
+        monospace;
+    text-shadow: 0 1px 3px #000;
+}
+
+#backend {
+    top: 1rem;
+}
+
+#render-stats {
+    bottom: 3rem;
+    pointer-events: none;
+}
+
+.menu {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    align-items: center;
+    padding: clamp(1.5rem, 8vw, 8rem);
+    background: linear-gradient(90deg, #090e10ed, #090e10bd 38%, #090e1026);
+}
+
+.menu section {
+    width: min(100%, 36rem);
+}
+
+.eyebrow {
+    color: #e0ac6f;
+    font:
+        0.8rem ui-monospace,
+        monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    font:
+        normal clamp(3rem, 7vw, 6rem) / 0.95 Georgia,
+        serif;
+}
+
+h1 span {
+    display: block;
+    margin-top: 0.6em;
+    color: #e0ac6f;
+    font:
+        0.28em ui-monospace,
+        monospace;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+#status {
+    margin: 2rem 0 1rem;
+}
+
+button {
+    min-width: 10rem;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid #dcb685;
+    border-radius: 2px;
+    background: #e0ac6f;
+    color: #17120c;
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+button:focus-visible {
+    outline: 2px solid #faf3e2;
+    outline-offset: 5px;
+}
+
+.controls {
+    color: #cbc6bc;
+    font-size: 0.85rem;
+}
+
+#reticle {
+    position: fixed;
+    top: calc(50% - 2px);
+    left: calc(50% - 2px);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #f8f3e0;
+    box-shadow: 0 0 4px #000;
+    pointer-events: none;
+}
+
+.secondary {
+    background: #131b1d;
+    color: #f1dfc4;
+}
+
+#sensitivity-control,
+#quality-control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+#hud {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    color: #fff7e6;
+    text-shadow:
+        0 1px 5px #000,
+        0 1px 3px #000;
+}
+
+#objective,
+#save-status {
+    margin: 1rem;
+}
+
+#prompt,
+#feedback {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0;
+    text-align: center;
+}
+
+#prompt {
+    top: calc(50% + 1.2rem);
+    font-weight: 650;
+}
+
+#feedback {
+    bottom: 12%;
+}
+
+dialog {
+    box-sizing: border-box;
+    width: min(33rem, calc(100% - 5rem));
+    max-height: 80vh;
+    padding: 1.5rem;
+    color: #f4ede1;
+    background: #151d20;
+    border: 1px solid #927452;
+}
+
+dialog::backdrop {
+    background: #050a0abf;
+}
+
+#inspection-body {
+    white-space: pre-wrap;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+
+#keypad {
+    margin: 0 0 1rem;
+}
+
+#keypad label {
+    display: block;
+}
+
+#code {
+    display: block;
+    width: 8ch;
+    padding: 0.4rem;
+    margin: 0.5rem 0;
+    font:
+        1.2rem ui-monospace,
+        monospace;
+}
+
+#quality-control {
+    margin-top: 0.75rem;
+}
+
+#quality {
+    min-width: 7rem;
+    padding: 0.35rem 0.6rem;
+    color: #f4ede1;
+    background: #131b1d;
+    border: 1px solid #927452;
+    font: inherit;
+}
+
+#quality:focus-visible,
+#sensitivity:focus-visible,
+#code:focus-visible {
+    outline: 2px solid #faf3e2;
+    outline-offset: 3px;
+}
+
+#flashlight {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    margin: 0;
+    padding: 0.3rem 0.55rem;
+    background: #101819;
+    border: 1px solid #657173;
+    font:
+        0.75rem ui-monospace,
+        monospace;
+}
+
+dialog[data-document] {
+    color: #251f16;
+    background: #eee2c8;
+    border-color: #ae9675;
+    color-scheme: light;
+}
+
+dialog[data-document] h2 {
+    font:
+        1.6rem Georgia,
+        serif;
+}
+
+dialog[data-document] button:focus-visible {
+    outline-color: #342619;
+}
+
+#inspection-body {
+    overflow-wrap: anywhere;
+    max-inline-size: 66ch;
+}
+
+@media (max-height: 38rem) {
+    .menu {
+        overflow: auto;
+        align-items: safe center;
+        padding-block: 1rem;
+    }
+}

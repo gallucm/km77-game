@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es-AR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kilómetro 17 · El Portón</title>
+        <link rel="icon" href="data:," />
+    </head>
+    <body>
+        <canvas id="game-canvas" aria-label="Escena 3D del predio"></canvas>
+        <p id="backend" aria-label="Motor gráfico"></p>
+        <p id="render-stats" hidden></p>
+        <main id="menu" class="menu">
+            <section aria-labelledby="title">
+                <p class="eyebrow">23:47 · Propiedad forestal</p>
+                <h1 id="title">Kilómetro 17 <span>El Portón</span></h1>
+                <p id="status" role="status">Cargando escena…</p>
+                <button id="start-button" type="button" disabled>Iniciar</button>
+                <button id="new-game" class="secondary" type="button" hidden>Nuevo juego</button>
+                <label id="sensitivity-control" hidden
+                    >Sensibilidad del mouse
+                    <input id="sensitivity" type="range" min="0.5" max="2" step="0.1" value="1" />
+                </label>
+                <label id="quality-control" hidden>
+                    Calidad gráfica
+                    <select id="quality">
+                        <option value="low">Baja</option>
+                        <option value="medium" selected>Media</option>
+                        <option value="high">Alta</option>
+                    </select>
+                </label>
+                <p class="controls">
+                    WASD caminar · Shift correr · E interactuar · F linterna · Tab mochila · Esc pausa
+                </p>
+            </section>
+        </main>
+        <div id="reticle" aria-hidden="true" hidden></div>
+        <aside id="hud" aria-label="Exploración" hidden>
+            <p id="objective"></p>
+            <p id="save-status" role="status"></p>
+            <p id="flashlight" role="status">F · Linterna apagada</p>
+            <p id="prompt" aria-live="off"></p>
+            <p id="feedback" role="status"></p>
+        </aside>
+        <dialog id="inspection" aria-labelledby="inspection-title">
+            <h2 id="inspection-title"></h2>
+            <div id="inspection-body"></div>
+            <form id="keypad" hidden>
+                <label for="code">Código de cuatro cifras</label>
+                <input
+                    id="code"
+                    name="code"
+                    inputmode="numeric"
+                    maxlength="4"
+                    pattern="[0-9]{4}"
+                    autocomplete="off"
+                    required
+                />
+                <button type="submit">Confirmar</button>
+                <button type="reset" class="secondary">Limpiar</button>
+                <p id="code-result" role="status"></p>
+            </form>
+            <button id="close-inspection" type="button">Volver al predio</button>
+        </dialog>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>

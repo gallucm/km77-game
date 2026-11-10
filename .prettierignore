@@ -1,0 +1,6 @@
+.claude
+.agents
+public/ammo
+
+# Preserve the plan’s hand-formatted tables and diagrams.
+plan-km77-game.md
