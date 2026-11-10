@@ -181,14 +181,20 @@ async function boot() {
     const commit = (next: Progress) => {
         if (next === progress) return;
         const returnEvent = next.tensionSeen && !progress.tensionSeen;
-        if ((next.doors.shed && !progress.doors.shed) || (next.doors.basement && !progress.doors.basement)) {
-            audio?.door();
-        }
+        const openedDoor =
+            (next.doors.shed && !progress.doors.shed) ||
+            (next.doors.basement && !progress.doors.basement) ||
+            (next.gate.open && !progress.gate.open);
+        const pickedUp = next.items !== progress.items;
+        const startedGenerator = next.generator.running && !progress.generator.running;
         progress = next;
         game.setProgress(next);
         const savedNow = storage !== null && saveProgress(storage, next);
         if (savedNow) hasSave = true;
         saveStatus.textContent = savedNow ? '' : 'El navegador no pudo guardar el progreso.';
+        if (openedDoor) audio?.door();
+        if (pickedUp) audio?.pickup();
+        if (startedGenerator) audio?.button();
         if (returnEvent) {
             audio?.returnSound();
             announce('Un golpe seco suena a tu izquierda.');
@@ -269,6 +275,7 @@ async function boot() {
         event.preventDefault();
         const outcome = act(progress, 'gate-panel', code.value);
         commit(outcome.progress);
+        audio?.button();
         codeResult.textContent = outcome.message;
         if (progress.gate.codeAccepted) {
             inspectionBody.textContent = outcome.message;
@@ -281,6 +288,7 @@ async function boot() {
     keypad.addEventListener('reset', () => {
         codeResult.textContent = '';
     });
+    keypad.querySelector('button[type="reset"]')?.addEventListener('click', () => audio?.button());
     window.addEventListener('keydown', (event) => {
         if (!active || event.repeat) return;
         if (event.code === 'Tab') {

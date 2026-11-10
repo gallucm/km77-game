@@ -17,6 +17,13 @@ export function createAmbience() {
         samples[i] = wind * Math.min(1, i / 600, (length - i - 1) / 600);
     }
 
+    // Ruido de amplitud completa para transitorios audibles tras el filtro.
+    const effectsBuffer = context.createBuffer(1, context.sampleRate, context.sampleRate);
+    const effectsSamples = effectsBuffer.getChannelData(0);
+    for (let i = 0; i < effectsSamples.length; i += 1) {
+        effectsSamples[i] = Math.random() * 2 - 1;
+    }
+
     const master = context.createGain();
     master.gain.value = 0;
     master.connect(context.destination);
@@ -44,18 +51,25 @@ export function createAmbience() {
     let stepDistance = 0;
     let indoors = false;
 
-    function noise(frequency: number, volume: number, duration: number) {
-        const now = context.currentTime;
+    function noise(
+        frequency: number,
+        volume: number,
+        duration: number,
+        output: AudioNode = master,
+        delay = 0,
+        soundBuffer: AudioBuffer = buffer
+    ) {
+        const now = context.currentTime + delay;
         const source = context.createBufferSource();
         const filter = context.createBiquadFilter();
         const gain = context.createGain();
-        source.buffer = buffer;
+        source.buffer = soundBuffer;
         filter.type = 'bandpass';
         filter.frequency.value = frequency;
         gain.gain.setValueAtTime(volume, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-        source.connect(filter).connect(gain).connect(master);
-        source.start(now, Math.random() * (buffer.duration - duration), duration);
+        source.connect(filter).connect(gain).connect(output);
+        source.start(now, Math.random() * (soundBuffer.duration - duration), duration);
         source.onended = () => {
             source.disconnect();
             filter.disconnect();
@@ -64,7 +78,23 @@ export function createAmbience() {
     }
 
     function door() {
-        if (context.state === 'running') noise(190, 0.7, 0.3);
+        if (context.state !== 'running') return;
+        noise(950, 0.9, 0.045, context.destination, 0, effectsBuffer);
+        noise(190, 0.95, 0.32, context.destination, 0.055, effectsBuffer);
+        noise(360, 0.7, 0.18, context.destination, 0.13, effectsBuffer);
+    }
+
+    function pickup() {
+        if (context.state !== 'running') return;
+        noise(430, 0.85, 0.09, context.destination, 0, effectsBuffer);
+        noise(1280, 0.95, 0.08, context.destination, 0.035, effectsBuffer);
+    }
+
+    function button() {
+        if (context.state !== 'running') return;
+        // El panel pausa la mezcla ambiental mientras el jugador usa el formulario.
+        noise(1050, 1.4, 0.055, context.destination, 0, effectsBuffer);
+        noise(520, 0.8, 0.045, context.destination, 0.018, effectsBuffer);
     }
 
     function returnSound() {
@@ -119,7 +149,9 @@ export function createAmbience() {
 
     return {
         context,
+        button,
         door,
+        pickup,
         returnSound,
         update,
         setActive(active: boolean) {
