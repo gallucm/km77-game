@@ -106,10 +106,10 @@ Fuentes seguras para iniciar (sección 7.3 del plan): Poly Haven (CC0), ambientC
 ### K17-GLB-012 — Pasto del bosque
 
 - **Archivo**: `public/assets/grass/pasto-del-bosque.glb`.
-- **Formato**: GLB 2.0, 29.720 bytes, 342 triángulos por mata y un material PBR con color por vértice.
+- **Formato**: GLB 2.0, 52.500 bytes y un material PBR con color por vértice. Matas rastrera (418 triángulos), mixta (550) y espigada (628).
 - **Origen y licencia**: original del proyecto, generado con `scripts/generate-grass.py`.
 - **Fecha de incorporación**: 10/11/2026 (FASE 3).
-- **Uso**: suelo exterior del predio, instanciado por sector.
+- **Uso**: suelo exterior del predio, instanciado por sector y variedad. El pasto más bajo bordea los caminos.
 - **Estado**: geometría, escala y apoyo verificados con el inspector de GLB.
 
 ### K17-GLB-013 — Bidón FUEL
@@ -133,9 +133,9 @@ Fuentes seguras para iniciar (sección 7.3 del plan): Poly Haven (CC0), ambientC
 ### K17-GLB-016 — Brazos del jugador
 
 - **Archivo**: `public/assets/player/brazos.glb`.
-- **Formato**: GLB 2.0, 56.232 bytes y 2.760 triángulos.
-- **Origen y licencia**: original del proyecto, generado por Mr. Design con `scripts/generate-arms.py`.
-- **Uso**: vista en primera persona, con brazos separados y balanceo procedural.
+- **Formato**: GLB 2.0, 595.056 bytes y 27.708 triángulos, con color por vértice y textura de lona incrustada.
+- **Origen y licencia**: original del proyecto, generado con `scripts/generate-arms.py`.
+- **Uso**: vista en primera persona, con las manos levantadas, la derecha un poco más adelante y balanceo procedural por brazo.
 - **Estado**: geometría y jerarquía inspeccionadas.
 
 ## Pendientes
